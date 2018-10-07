@@ -1,13 +1,13 @@
 import { checkCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
-const checkCollisions = (cannonBalls, flyingObjects) => {
-  const obejctsDestroyed = [];
-  flyingObjects.forEach((flyingObject) => {
-    const currentLifeTime = (new Date()).getTime() - flyingObject.createdAt;
-    const calculatedPosition =  {
-      x: flyingObject.position.x,
-      y: flyingObject.position.y + ((currentLifeTime / 4000) * gameHeight),
+const checkCollisions = (cannonBalls, flyingDiscs) => {
+  const objectsDestroyed = [];
+  flyingDiscs.forEach((flyingDisc) => {
+    const currentLifeTime = (new Date()).getTime() - flyingDisc.createdAt;
+    const calculatedPosition = {
+      x: flyingDisc.position.x,
+      y: flyingDisc.position.y + ((currentLifeTime / 4000) * gameHeight),
     };
     const rectA = {
       x1: calculatedPosition.x - 40,
@@ -19,18 +19,18 @@ const checkCollisions = (cannonBalls, flyingObjects) => {
       const rectB = {
         x1: cannonBall.position.x - 8,
         y1: cannonBall.position.y - 8,
-        x2: cannonBall.position.x - 8,
-        y2: cannonBall.positiony - 8,
+        x2: cannonBall.position.x + 8,
+        y2: cannonBall.position.y + 8,
       };
       if (checkCollision(rectA, rectB)) {
-        obejctsDestroyed.push({
+        objectsDestroyed.push({
           cannonBallId: cannonBall.id,
-          flyingObjectId: flyingObject.id,
+          flyingDiscId: flyingDisc.id,
         });
       }
     });
   });
-  return obejctsDestroyed;
-}
+  return objectsDestroyed;
+};
 
 export default checkCollisions;

@@ -28,11 +28,12 @@ function moveObjects(state, action) {
   const angle = calculateAngle(0, 0, x, y);
 
   const objectsDestroyed = checkCollisions(cannonBalls, flyingObjects);
-  const cannonBallsDestroyed = objectsDestroyed.map((object) => (object.cannonBallId));
-  const flyingObjectsDestroyed = objectsDestroyed.map((object) => (object.flyingObjectID));
+  const cannonBallsDestroyed = objectsDestroyed.map(object => (object.cannonBallId));
+  const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.flyingDiscId));
 
-  cannonBalls = cannonBalls.filter((cannonBall) => (cannonBallsDestroyed.indexOf(cannonBall.id)));
-  flyingObjects = flyingObjects.filter((flyingObject) => (flyingObjectsDestroyed.indexOf(flyingObject.id)));
+  cannonBalls = cannonBalls.filter(cannonBall => (cannonBallsDestroyed.indexOf(cannonBall.id)));
+  flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
+
   return {
     ...newState,
     gameState: {
